@@ -41,7 +41,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          docker login -u adh1mzz -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Build Docker Image using MLflow
         run: |
