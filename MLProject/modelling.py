@@ -18,8 +18,8 @@ import os
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set tracking URI to local mlruns
-mlflow.set_tracking_uri("mlruns")
+# Set tracking URI dynamically from environment (or default to local mlruns)
+pass
 
 def plot_confusion_matrix(y_true, y_pred, filename="confusion_matrix.png"):
     cm = confusion_matrix(y_true, y_pred)
