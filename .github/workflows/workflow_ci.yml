@@ -40,8 +40,12 @@ jobs:
 
       - name: Log in to Docker Hub
         run: |
-            echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-
+          if [ -z "${{ secrets.DOCKER_HUB_USERNAME }}" ] || [ -z "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" ]; then
+          echo "Error: Docker Hub credentials are not configured"
+          exit 1
+          fi
+          echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+          
       - name: Build Docker Image using MLflow
         run: |
           MODEL_PATH=$(cat MLProject/model_path.txt)
